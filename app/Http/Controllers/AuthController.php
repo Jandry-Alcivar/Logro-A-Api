@@ -115,6 +115,16 @@ class AuthController extends Controller
            "Listado"=> $provincias,
    ]);
        }
+       public function listaPC(){
+
+        $provincias=DB::table('provincias')
+        ->join('cantones', 'provincias.id', '=', 'cantones.provincia_id')
+        ->select('provincias.provincia','cantones.canton')
+        ->get();
+        return response()->json([
+            "Listado"=> $provincias,
+    ]);
+       }
 
 
 }
