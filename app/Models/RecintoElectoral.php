@@ -10,8 +10,13 @@ class RecintoElectoral extends Model
     use HasFactory;
     public $timestamps=false;
     protected $table = 'recintoselectorales';
-     
+
      protected $fillable = [
         'recinto','parroquia_id','estado'
     ];
+
+    public function parroquia()
+    {
+        return $this->belongsTo(Parroquia::class, 'parroquia_id');
+}
 }

@@ -19,6 +19,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/auth/cantones', [AuthController::class, 'listaCP']);
     Route::get('/auth/provincias', [AuthController::class, 'listPCPR']);
     Route::get('/auth/provis', [AuthController::class, 'listaPC']);
+    Route::put('/auth/actualizar', [AuthController::class, 'UpdateRE']);
+
 
 });
 

@@ -1,7 +1,22 @@
 <?php
 
+/**
+ * @OA\Info(
+ *    title="APIs For Thrift Store",
+ *    version="1.0.0",
+ * ),
+ *   @OA\SecurityScheme(
+ *       securityScheme="bearerAuth",
+ *       in="header",
+ *       name="bearerAuth",
+ *       type="http",
+ *       scheme="bearer",
+ *       bearerFormat="JWT",
+ *    ),
+ */
 namespace App\Http\Controllers;
 
+use App\Models\RecintoElectoral;
 use App\Models\User;
 use App\Models\Persona;
 use Illuminate\Http\Request;
@@ -92,7 +107,6 @@ class AuthController extends Controller
         }
     }
 
-
     public function listPCPR(){
 
      $provincias=DB::table('provincias')
@@ -125,6 +139,29 @@ class AuthController extends Controller
             "Listado"=> $provincias,
     ]);
        }
+       public function UpdateRE(Request $request, $id){
+
+        $request->validate([
+           'recinto' => 'required|string',
+           'parroquia_id' => 'required',
+       ]);
+
+
+       $recinto = RecintoElectoral::find($id);
+
+       if ($recinto->estado==false) {
+           return response()->json(['message' => 'Registro electoral no encontrado'], 404);
+       }
+
+       $recinto->update([
+           'recinto' => $request->input('recinto'),
+           'parroquia_id' => $request->input('parroquia_id'),
+
+       ]);
+       return response()->json(['message' => 'Registro electoral actualizado correctamente']);
+
+
+        }
 
 
 }

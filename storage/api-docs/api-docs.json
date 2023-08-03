@@ -1,0 +1,52 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Nombre de tu API",
+        "description": "http://127.0.0.1:8000",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/listPCPR": {
+            "get": {
+                "tags": [
+                    "Provincias, Cantones, Parroquias, Recintos"
+                ],
+                "summary": "Lista de provincias, cantones, parroquias y recintos electorales",
+                "operationId": "c45feec223a3ab1ff8e7af895f795eb9",
+                "responses": {
+                    "200": {
+                        "description": "Listado de provincias, cantones, parroquias y recintos electorales",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "provincia": {
+                                                "type": "string",
+                                                "example": "Pichincha"
+                                            },
+                                            "canton": {
+                                                "type": "string",
+                                                "example": "Quito"
+                                            },
+                                            "parroquia": {
+                                                "type": "string",
+                                                "example": "La Carolina"
+                                            },
+                                            "recinto": {
+                                                "type": "string",
+                                                "example": "Centro de votación 1"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
