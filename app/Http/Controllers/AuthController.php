@@ -93,6 +93,18 @@ class AuthController extends Controller
     }
 
 
+    public function listPCPR(){
+
+     $provincias=DB::table('provincias')
+    ->join('cantones', 'provincias.id', '=', 'cantones.provincia_id')
+    ->join('parroquias', 'cantones.id', '=', 'parroquias.canton_id')
+    ->join('recintoselectorales', 'parroquias.id', '=', 'recintoselectorales.parroquia_id')
+    ->select('provincias.provincia', 'cantones.canton', 'parroquias.parroquia', 'recintoselectorales.recinto')
+    ->get();
+    return response()->json([
+        "Listado"=> $provincias,
+]);
+    }
 
 
 }

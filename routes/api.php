@@ -16,9 +16,12 @@ use App\Http\Controllers\Personas;
 */
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
+    
+    Route::get('/auth/provincias', [AuthController::class, 'listPCPR']);
 
 });
 
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
+  Route::get('/auth/users', [AuthController::class, 'listuser']);
 
