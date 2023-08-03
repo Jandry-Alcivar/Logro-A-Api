@@ -19,6 +19,7 @@ namespace App\Http\Controllers;
 use App\Models\RecintoElectoral;
 use App\Models\User;
 use App\Models\Persona;
+use Canton;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -161,6 +162,29 @@ class AuthController extends Controller
        return response()->json(['message' => 'Registro electoral actualizado correctamente']);
 
 
+        }
+        public function Deletec(Request $request, $cantonId)
+        {
+            // Buscar el cantón por su ID
+            $canton = Canton::find($cantonId);
+
+            // Verificar si el cantón existe
+            if ($canton->estado==false) {
+                return response()->json(['message' => 'Cantón no encontrado'], 404);
+            }
+
+            // Obtener las parroquias asociadas al cantón
+            $parroquias = $canton->parroquias;
+
+            // Eliminar cada parroquia asociada al cantón
+            foreach ($parroquias as $parroquia) {
+                $parroquias->estado=false;
+                $parroquias->save();
+
+            }
+
+            // Devolver una respuesta de éxito
+            return response()->json(['message' => 'Parroquias eliminadas correctamente'],200);
         }
 
 

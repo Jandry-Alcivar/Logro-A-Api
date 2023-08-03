@@ -20,6 +20,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/auth/provincias', [AuthController::class, 'listPCPR']);
     Route::get('/auth/provis', [AuthController::class, 'listaPC']);
     Route::put('/auth/actualizar', [AuthController::class, 'UpdateRE']);
+    Route::delete('/auth/delete', [AuthController::class, 'deletec']);
 
 
 });
